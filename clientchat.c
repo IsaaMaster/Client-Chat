@@ -49,43 +49,9 @@ int main() {
     memset(send_message, 0, sizeof(send_message));
 
     usleep(200000);
-    /*
-    char message[1024] = {0};
-    printf("Enter your message: ");
-    scanf("%s", message);
-    snprintf(send_message, sizeof(send_message), "%s\n", message);
-    send(sock, send_message, sizeof(send_message), 0); 
-    memset(send_message, 0, sizeof(send_message));
-
-    int bytes_received;
-    while (send(sock, send_message, sizeof(send_message), 0) > 0) {
-        printf("Enter your message: ");
-        scanf("%s", message);
-        snprintf(send_message, sizeof(send_message), "%s\n", message);
-        send(sock, send_message, sizeof(send_message), 0);
-        memset(send_message, 0, sizeof(send_message));
-
-        while ((bytes_received = recv(sock, recv_message, sizeof(recv_message) - 1, 0)) > 0) {
-            recv_message[bytes_received] = '\0';  // Ensure null termination
-            printf("%s", recv_message);
-        }
-    }
-    */
-
-    //struct timeval timeout;
-    //timeout.tv_sec = 3;
-    //timeout.tv_usec = 0;
-    //setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
-
-
-   // int bytes_received;
-    while(1){
-        // Read all available messages
-       // while ((bytes_received = recv(sock, recv_message, sizeof(recv_message) - 1, 0)) > 0) {
-        //    recv_message[bytes_received] = '\0'; // Null-terminate the string
-        //    printf("%s", recv_message); // Print all received messages at once
-        //}
-               
+    
+    
+    while(1){  
         recv(sock, recv_message, sizeof(recv_message) - 1, 0);
         printf("> %s\n", recv_message);
         fflush(stdout);
