@@ -56,15 +56,15 @@ int sendMessage(int sock, char* message) {
     return 0;
 }
 
-// Adds a character to a string.
-int addChar(char* message, char ch) {
+int addChar(char* message, char ch, size_t max_size) {
     int len = strlen(message);
-    if (len < sizeof(message) - 1) {
+    if (len < max_size - 1) {  // Use actual buffer size
         message[len] = ch;
-        message[len + 1] = '\0';  // Null-terminate the string
+        message[len + 1] = '\0';
     }
     return 0;
 }
+
 
 
 int main() {
@@ -137,7 +137,7 @@ int main() {
             if (num_read > 0) {
                 // When the enter key is pressed, send the message to the server
                 if (ch == '\n') {
-                    addChar(send_message, '\n');
+                    addChar(send_message, '\n', sizeof(send_message));
                     sendMessage(sock, send_message);
                 // When the backspace key is pressed, remove the last character from the message
                 } else if (ch == 127) {
@@ -150,7 +150,7 @@ int main() {
                     }
                 // Otherwise add the character to the message
                 } else {
-                    addChar(send_message, ch);
+                    addChar(send_message, ch, sizeof(send_message));
                     // Display the character on the screen
                     printf("%c", ch);
                     fflush(stdout);  // Ensure the character is displayed immediately
